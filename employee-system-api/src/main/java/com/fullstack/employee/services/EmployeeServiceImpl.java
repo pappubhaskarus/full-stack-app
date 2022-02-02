@@ -47,6 +47,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeRepository.deleteById(id);
     }
 
+    @Override
+    public Employee getEmployeesById(long id) {
+        EmployeeEntity employeeEntity = employeeRepository.findById(id).orElseThrow();
+        return mapEmployeeEntityToPOJO(employeeEntity);
+    }
+
     private Employee mapEmployeeEntityToPOJO(EmployeeEntity employeeEntity) {
         Employee employee = new Employee();
         BeanUtils.copyProperties(employeeEntity, employee);
